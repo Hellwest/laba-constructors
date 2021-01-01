@@ -12,8 +12,6 @@ Student::Student() {
 	this->gender = 0;
 	this->number = ++Student::created;
 	Student::instances++;
-	std::cout << "Initialized with default constructor:\n";
-	display();
 }
 
 Student::Student(std::string name, int course, bool gender) {
@@ -22,42 +20,34 @@ Student::Student(std::string name, int course, bool gender) {
 	this->gender = gender;
 	this->number = ++Student::created;
 	Student::instances++;
-	std::cout << "Initialized with parameters:\n";
-	display();
 }
 
-Student::Student(Student &student) {
+Student::Student(const Student &student) {
 	this->name = std::string(student.name);
 	this->course = student.course;
 	this->gender = student.gender;
 	this->number = ++Student::created;
 	Student::instances++;
-	std::cout << "Initialized by copy:\n";
-	display();
-}
-
-Student::Student(Student student) {
-	Student temp(student);
-
-	return temp;
 }
 
 Student::~Student() {
 	Student::instances--;
-	std::cout << "Destructuring student number " << this->number << "\n";
-	std::cout << "Instances left after destroying: " << Student::instances << "\n";
+	std::cout << "Destructuring student number " << this->number << ". Instances left after destroying: " << Student::get_instances_count() << "\n";
 }
 
-void Student::set_name_course_gender(Student student, std::string name, int course, bool gender) {
-	std::cout << "Student object at " << &student << " was initialized by copy. Editing:\n";
-	student.name = name;
-	student.course = course;
-	student.gender = gender;
+void Student::edit(std::string name, int course, bool gender) {
+	this->name = name;
+	this->course = course;
+	this->gender = gender;
+}
+
+void Student::constructor_by_copy_type_2(Student student) {
+	std::cout << "Student object at " << &student << " was initialized by copy:\n";
 	student.display();
 	std::cout << "Destroying the student that was initialized by copy in a function\n";
 }
 
-Student Student::get_student_from_temp(Student & student) {
+Student Student::get_student_from_temp(Student &student) {
 	Student temp(student);
 
 	return temp;
