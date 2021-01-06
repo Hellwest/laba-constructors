@@ -34,6 +34,9 @@ int main() {
 	students[0].edit("Array member 1", 1, 1);
 	std::cout << "Student 1 in the array:\n";
 	students[0].display();
+	std::cout << "\nOther array students:\n";
+	students[1].display();
+	students[2].display();
 
 	std::cout << "\nDestroying students at the end of the program\n";
 	return 0;
